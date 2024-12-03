@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { MoreHorizontal, Copy, Trash2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React, { useState } from "react";
+import { MoreHorizontal, Copy, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,15 +8,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { toast } from '@/hooks/use-toast';
+} from "@/components/ui/dropdown-menu";
+import { toast } from "../ui/use-toast";
 
 export interface ActionItem {
   label: string;
   icon?: React.ReactNode;
   onClick?: () => void;
   href?: string;
-  type?: 'link' | 'copy' | 'delete' | 'custom';
+  type?: "link" | "copy" | "delete" | "custom";
 }
 
 export interface DataTableActionsProps {
@@ -40,17 +40,17 @@ export function DataTableActions({
 
   const handleActionClick = (action: ActionItem) => {
     switch (action.type) {
-      case 'copy':
-        navigator.clipboard.writeText(action.onClick?.() || '');
+      case "copy":
+        navigator.clipboard.writeText(action.onClick?.() || "");
         toast({
-          title: 'Copied',
+          title: "Copied",
           description: `${action.label} has been copied to clipboard.`,
         });
         break;
-      case 'delete':
+      case "delete":
         setIsDeleteDialogOpen(true);
         break;
-      case 'custom':
+      case "custom":
       default:
         action.onClick?.();
         break;
@@ -80,8 +80,8 @@ export function DataTableActions({
                 {action.icon && (
                   <span className="w-4 h-4 mr-2">{action.icon}</span>
                 )}
-                {action.type === 'link' && action.href ? (
-                  <a href={action.href} className="flex w-full items-center">
+                {action.type === "link" && action.href ? (
+                  <a href={action.href} className="flex items-center w-full">
                     {action.label}
                   </a>
                 ) : (
